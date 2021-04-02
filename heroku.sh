@@ -1,8 +1,4 @@
 (
-  PROJECT_ROOT="$(cd $(dirname $0)/..; pwd)"
-
-  cd $PROJECT_ROOT
-
   if [ "$BUILD_ENV" = "lambdacraft" ]; then
     yarn workspace front-end build
   elif [ "$BUILD_ENV" = "lambdacraft-api" ]; then
