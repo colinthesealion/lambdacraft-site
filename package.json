@@ -20,6 +20,7 @@
     "node": "14.x"
   },
   "scripts": {
-    "build": "yarn workspaces foreach run build"
+    "build": "yarn workspaces foreach run build",
+    "heroku-postbuild": "yarn build"
   }
 }
