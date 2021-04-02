@@ -22,7 +22,7 @@ export default function AdvancementGroup({ groupName, advancementData }: Advancm
     [advancementDefinitions, advancementData]
   );
   return (
-    <TreeItem nodeId={rootDefinition.id} label={<TodoLabel name={rootDefinition.name} done={done} />}>
+    <TreeItem nodeId={rootDefinition.id} label={<TodoLabel id={rootDefinition.id} name={rootDefinition.name} done={done} />}>
       {advancementDefinitions.map(advancementDefinition => (
         <Advancement key={advancementDefinition.id} definition={advancementDefinition} data={advancementData} />
       ))}
