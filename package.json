@@ -17,6 +17,10 @@
     "@types/node": "^14.14.37"
   },
   "engines": {
-    "node": "15.x"
+    "node": "14.x"
+  },
+  "scripts": {
+    "build": "yarn workspaces foreach run build",
+    "start": "yarn workspace back-end start"
   }
 }
