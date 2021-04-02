@@ -16,6 +16,10 @@ export async function getPlayerData(uuid: string): Promise<any> {
   return fetchFromBackend(`player/data/${uuid}`);
 }
 
+export async function getPlayerStats(uuid: string): Promise<any> {
+  return fetchFromBackend(`player/stats/${uuid}`);
+}
+
 export async function getPlayers(): Promise<Player[]> {
   return (await fetchFromBackend('players')) as Player[];
 }

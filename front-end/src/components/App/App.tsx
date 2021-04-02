@@ -25,7 +25,7 @@ import { TabContext, TabList, TabPanel } from '@material-ui/lab';
 
 import Advancements from '../Advancements';
 import { AdvancementData, Player } from '../../types';
-import { getPlayers, getPlayerAdvancementData, getPlayerData } from '../../api';
+import { getPlayers, getPlayerAdvancementData, getPlayerData, getPlayerStats } from '../../api';
 
 const playersQuery = selector<Player[]>({
   key: 'Players',
@@ -120,6 +120,18 @@ function PlayerData({ player }: PlayerDataProps) {
   );
 }
 
+const playerStatsQuery = selectorFamily<any,string>({
+  key: 'PlayerStats',
+  get: uuid => () => getPlayerStats(uuid),
+});
+interface PlayerStatsProps {
+  player: Player;
+}
+function PlayerStats({ player }: PlayerDataProps) {
+  const data = useRecoilValue(playerStatsQuery(player.uuid));
+  return <ReactJson src={data} />;
+}
+
 interface AppProps {
 }
 export default function App(_props: AppProps) {
@@ -141,6 +153,7 @@ export default function App(_props: AppProps) {
               <TabList onChange={handleChange}>
                 <Tab label="Skin" value="skin" />
                 <Tab label="Data" value="data" />
+                <Tab label="Stats" value="stats" />
                 <Tab label="Advancement Progress" value="advancements" />
               </TabList>
             </Paper>
@@ -150,6 +163,11 @@ export default function App(_props: AppProps) {
             <TabPanel value="data">
               <React.Suspense fallback={<CircularProgress />}>
                 <PlayerData player={player} />
+              </React.Suspense>
+            </TabPanel>
+            <TabPanel value="stats">
+              <React.Suspense fallback={<CircularProgress />}>
+                <PlayerStats player={player} />
               </React.Suspense>
             </TabPanel>
             <TabPanel value="advancements">

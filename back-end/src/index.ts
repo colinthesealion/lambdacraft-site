@@ -29,8 +29,7 @@ async function getNBTDataFromCubedHost(filename: string) {
   console.groupEnd();
 
   if (buffer.size()) {
-    const { parsed, type } = await parse(buffer.getContents() as Buffer);
-    console.log(type);
+    const { parsed } = await parse(buffer.getContents() as Buffer);
     return parsed.value;
   }
   return;
@@ -64,6 +63,11 @@ function startExpressServer() {
     const filename = `Savanah Plateau/playerdata/${req.params.uuid}.dat`;
     const data = await getNBTDataFromCubedHost(filename);
     res.json(data);
+  });
+  app.get('/player/stats/:uuid', (req, res) => {
+    const filename = `Savanah Plateau/stats/${req.params.uuid}.json`;
+    res.type('json');
+    streamFileFromCubedHost(filename, res);
   });
   app.get('/players', (_req, res) => {
     res.type('json');
