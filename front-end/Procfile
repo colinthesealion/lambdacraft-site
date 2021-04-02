@@ -1,1 +1,1 @@
-web: yarn workspace front-end start
+web: yarn workspace front-end start:prod
