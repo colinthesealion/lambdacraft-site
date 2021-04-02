@@ -49,7 +49,8 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageDependencies": [
             ["@types/cors", "npm:2.8.10"],
             ["@types/express", "npm:4.17.11"],
-            ["@types/node", "npm:14.14.37"]
+            ["@types/node", "npm:14.14.37"],
+            ["typescript", "patch:typescript@npm%3A4.2.3#builtin<compat/typescript>::version=4.2.3&hash=a45b0e"]
           ],
           "linkType": "SOFT",
         }]
@@ -5793,6 +5794,15 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "linkType": "HARD",
         }]
       ]],
+      ["@types/prompt-sync", [
+        ["npm:4.1.0", {
+          "packageLocation": "./.yarn/cache/@types-prompt-sync-npm-4.1.0-5d6d03c0bb-21bc6832fb.zip/node_modules/@types/prompt-sync/",
+          "packageDependencies": [
+            ["@types/prompt-sync", "npm:4.1.0"]
+          ],
+          "linkType": "HARD",
+        }]
+      ]],
       ["@types/prop-types", [
         ["npm:15.7.3", {
           "packageLocation": "./.yarn/cache/@types-prop-types-npm-15.7.3-084e0015c6-bd0eab69d5.zip/node_modules/@types/prop-types/",
@@ -7970,10 +7980,12 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@types/cors", "npm:2.8.10"],
             ["@types/express", "npm:4.17.11"],
             ["@types/ftp", "npm:0.3.31"],
+            ["@types/prompt-sync", "npm:4.1.0"],
             ["basic-ftp", "npm:4.6.6"],
             ["cors", "npm:2.8.5"],
             ["express", "npm:4.17.1"],
             ["husky", "npm:6.0.0"],
+            ["prompt-sync", "npm:4.2.0"],
             ["regenerator-runtime", "npm:0.13.8"],
             ["size-limit", "npm:4.10.2"],
             ["tsdx", "npm:0.14.1"],
@@ -15870,7 +15882,8 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["lambdacraft-site", "workspace:."],
             ["@types/cors", "npm:2.8.10"],
             ["@types/express", "npm:4.17.11"],
-            ["@types/node", "npm:14.14.37"]
+            ["@types/node", "npm:14.14.37"],
+            ["typescript", "patch:typescript@npm%3A4.2.3#builtin<compat/typescript>::version=4.2.3&hash=a45b0e"]
           ],
           "linkType": "SOFT",
         }]
@@ -19215,6 +19228,16 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           ],
           "packagePeers": [
             "bluebird"
+          ],
+          "linkType": "HARD",
+        }]
+      ]],
+      ["prompt-sync", [
+        ["npm:4.2.0", {
+          "packageLocation": "./.yarn/cache/prompt-sync-npm-4.2.0-1ce4e10166-9d712b8e03.zip/node_modules/prompt-sync/",
+          "packageDependencies": [
+            ["prompt-sync", "npm:4.2.0"],
+            ["strip-ansi", "npm:5.2.0"]
           ],
           "linkType": "HARD",
         }]

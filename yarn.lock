@@ -2994,6 +2994,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/prompt-sync@npm:^4.1.0":
+  version: 4.1.0
+  resolution: "@types/prompt-sync@npm:4.1.0"
+  checksum: 21bc6832fb849c71bd9ac940e43fc1f91acb7f79a7e5f610141ca0b3bf97ba392be1c541598a0874bc2e9812e010854955e039dfb0c3f587b959190bb5c4aff6
+  languageName: node
+  linkType: hard
+
 "@types/prop-types@npm:*":
   version: 15.7.3
   resolution: "@types/prop-types@npm:15.7.3"
@@ -4593,10 +4600,12 @@ __metadata:
     "@types/cors": ^2.8.10
     "@types/express": ^4.17.11
     "@types/ftp": ^0.3.31
+    "@types/prompt-sync": ^4.1.0
     basic-ftp: ^4.6.6
     cors: ^2.8.5
     express: ^4.17.1
     husky: ^6.0.0
+    prompt-sync: ^4.2.0
     regenerator-runtime: ^0.13.7
     size-limit: ^4.10.2
     tsdx: ^0.14.1
@@ -11425,6 +11434,7 @@ fsevents@^1.2.7:
     "@types/cors": ^2.8.10
     "@types/express": ^4.17.11
     "@types/node": ^14.14.37
+    typescript: ^4.2.3
   languageName: unknown
   linkType: soft
 
@@ -14374,6 +14384,15 @@ fsevents@^1.2.7:
   dependencies:
     asap: ~2.0.6
   checksum: ec94008d8a673c276dbc7722c215f583026b8d2588fb83f40e69908c553801eac7fbe3034c9bca853d5c422af20826abdfb9391b982a888868d9c88281dc59fb
+  languageName: node
+  linkType: hard
+
+"prompt-sync@npm:^4.2.0":
+  version: 4.2.0
+  resolution: "prompt-sync@npm:4.2.0"
+  dependencies:
+    strip-ansi: ^5.0.0
+  checksum: 9d712b8e03efa8d0ac4b3163dce1486a38f4c7ad90543d2c98a8bb6e8ebb98a062aa2af8e713e80e87f6ff51e8ee1b09a89095c6bfb2822b17f34bf5099f861f
   languageName: node
   linkType: hard
 

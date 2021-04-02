@@ -20,6 +20,11 @@
     "node": "14.x"
   },
   "scripts": {
-    "build": "bash heroku.sh"
+    "build": "bash heroku.sh",
+    "be": "yarn workspace back-end",
+    "fe": "yarn workspace front-end"
+  },
+  "dependencies": {
+    "typescript": "^4.2.3"
   }
 }

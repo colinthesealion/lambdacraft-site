@@ -1,6 +1,21 @@
 import React from 'react';
-import { RecoilRoot, selector, selectorFamily, useRecoilValue } from 'recoil';
-import { CircularProgress, FormControl, InputLabel, Select, MenuItem, Typography } from '@material-ui/core';
+import {
+  RecoilRoot,
+  selector,
+  selectorFamily,
+  useRecoilValue
+} from 'recoil';
+import {
+  CircularProgress,
+  FormControl,
+  InputLabel,
+  MenuItem,
+  Paper,
+  Select,
+  Tab,
+  Typography
+} from '@material-ui/core';
+import { TabContext, TabList, TabPanel } from '@material-ui/lab';
 
 import Advancements from '../Advancements';
 import { AdvancementData, Player } from '../../types';
@@ -26,7 +41,7 @@ function PlayerDropdown({ player, setPlayer }: PlayerDropdownProps) {
   }, [players, setPlayer]);
   return (
     <FormControl style={{ minWidth: 120 }}>
-      <InputLabel>Player</InputLabel>
+      <InputLabel>Member</InputLabel>
       <Select
         value={player?.uuid ?? ''}
         onChange={handleChange}
@@ -53,16 +68,37 @@ interface AppProps {
 }
 export default function App(_props: AppProps) {
   const [player, setPlayer] = React.useState<Player>();
+  const [selectedTab, selectTab]  = React.useState('skin');
+  const handleChange = React.useCallback((_event: React.SyntheticEvent, value: string) => {
+    selectTab(value);
+  }, [selectTab]);
   return (
     <RecoilRoot>
-      <Typography variant="h4" gutterBottom>LambdaCraft Advancement Progress</Typography>
+      <Typography variant="h4" gutterBottom>LambdaCraft Members</Typography>
       <React.Suspense fallback={<CircularProgress />}>
         <PlayerDropdown player={player} setPlayer={setPlayer} />
       </React.Suspense>
-      <br /><br />
-      <React.Suspense fallback={<CircularProgress />}>
-        {player && <PlayerAdvancments player={player} />}
-      </React.Suspense>
+      {player && (
+        <>
+          <TabContext value={selectedTab}>
+            <Paper square>
+              <TabList onChange={handleChange}>
+                <Tab label="Skin" value="skin" />
+                <Tab label="Advancement Progress" value="advancements" />
+              </TabList>
+            </Paper>
+            <TabPanel value="skin">
+              <img src={`https://minecraftskinstealer.com/api/v1/skin/render/fullbody/${player.name}/700`} alt={player.name} />
+            </TabPanel>
+            <TabPanel value="advancements">
+              <React.Suspense fallback={<CircularProgress />}>
+                {player && <PlayerAdvancments player={player} />}
+              </React.Suspense>
+            </TabPanel>
+          </TabContext>
+        </>
+      )}
+      
     </RecoilRoot>
   );
 }
