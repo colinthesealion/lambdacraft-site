@@ -1,4 +1,5 @@
 import React from 'react';
+import ReactJson from 'react-json-view';
 import {
   RecoilRoot,
   selector,
@@ -13,13 +14,18 @@ import {
   Paper,
   Select,
   Tab,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableRow,
   Typography
 } from '@material-ui/core';
 import { TabContext, TabList, TabPanel } from '@material-ui/lab';
 
 import Advancements from '../Advancements';
 import { AdvancementData, Player } from '../../types';
-import { getPlayers, getPlayerAdvancementData } from '../../api';
+import { getPlayers, getPlayerAdvancementData, getPlayerData } from '../../api';
 
 const playersQuery = selector<Player[]>({
   key: 'Players',
@@ -64,6 +70,56 @@ function PlayerAdvancments({ player }: PlayerAdvancmentProps) {
   return <Advancements advancementData={advancementData} />;
 }
 
+const playerDataQuery = selectorFamily<any,string>({
+  key: 'PlayerData',
+  get: uuid => () => getPlayerData(uuid),
+});
+interface PlayerDataProps {
+  player: Player;
+}
+const dimensionNames: {[key: string]: string} = {
+  'minecraft:the_nether': 'Nether',
+  'minecraft:the_end': 'The End',
+  'minecraft:overworld': 'Overworld',
+};
+function getDimensionName(id: string) {
+  if (id in dimensionNames) {
+    return dimensionNames[id];
+  }
+  else {
+    return id;
+  }
+}
+function PlayerData({ player }: PlayerDataProps) {
+  const data = useRecoilValue(playerDataQuery(player.uuid));
+  return(
+    <TableContainer component={Paper}>
+      <Table>
+        <TableBody>
+          <TableRow>
+            <TableCell><>Current Dimension:</></TableCell>
+            <TableCell><>{getDimensionName(data.Dimension.value)}</></TableCell>
+          </TableRow>
+          <TableRow>
+            <TableCell><>Current Position:</></TableCell>
+            <TableCell><>{data.Pos.value.value[0]}, {data.Pos.value.value[1]}, {data.Pos.value.value[2]}</></TableCell>
+          </TableRow>
+          <TableRow>
+            <TableCell><>Last Seen:</></TableCell>
+            <TableCell>
+              <ReactJson src={data.Paper.value.LastSeen} />
+            </TableCell>
+          </TableRow>
+          <TableRow>
+            <TableCell><>Level:</></TableCell>
+            <TableCell><>{data.XpLevel.value}</></TableCell>
+          </TableRow>
+        </TableBody>
+      </Table>
+    </TableContainer>
+  );
+}
+
 interface AppProps {
 }
 export default function App(_props: AppProps) {
@@ -84,21 +140,26 @@ export default function App(_props: AppProps) {
             <Paper square>
               <TabList onChange={handleChange}>
                 <Tab label="Skin" value="skin" />
+                <Tab label="Data" value="data" />
                 <Tab label="Advancement Progress" value="advancements" />
               </TabList>
             </Paper>
             <TabPanel value="skin">
               <img src={`https://minecraftskinstealer.com/api/v1/skin/render/fullbody/${player.name}/700`} alt={player.name} />
             </TabPanel>
+            <TabPanel value="data">
+              <React.Suspense fallback={<CircularProgress />}>
+                <PlayerData player={player} />
+              </React.Suspense>
+            </TabPanel>
             <TabPanel value="advancements">
               <React.Suspense fallback={<CircularProgress />}>
-                {player && <PlayerAdvancments player={player} />}
+                <PlayerAdvancments player={player} />
               </React.Suspense>
             </TabPanel>
           </TabContext>
         </>
       )}
-      
     </RecoilRoot>
   );
 }
