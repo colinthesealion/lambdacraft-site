@@ -4,8 +4,8 @@ import { TreeItem } from '@material-ui/lab';
 import TodoLabel from '../TodoLabel';
 import { CriteriaData, CriterionDefinition } from "../../types";
 
-function isDone(definition: CriterionDefinition, data: CriteriaData) {
-    return definition.id in data;
+function isDone(definition: CriterionDefinition, data?: CriteriaData) {
+    return !!data && definition.id in data;
 }
 
 function getName({ id, name }: CriterionDefinition) {
@@ -20,7 +20,7 @@ function getName({ id, name }: CriterionDefinition) {
 
 interface CriteriaProps {
     definition: CriterionDefinition;
-    data: CriteriaData;
+    data?: CriteriaData;
 }
 export default function Criteria({ definition, data}: CriteriaProps) {
   const { id } = definition;

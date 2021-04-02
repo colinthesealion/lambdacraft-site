@@ -22,7 +22,7 @@ export default function Advancement({ definition, data}: AdvancementProps) {
   return (
     <TreeItem nodeId={id} label={<TodoLabel name={name} done={done} />}>
       {!!criteria.length && criteria[0].criterion.map(criteria => (
-        <Criteria key={criteria.id} definition={criteria} data={data[id].criteria} />
+        <Criteria key={criteria.id} definition={criteria} data={data[id]?.criteria} />
       ))}
     </TreeItem>
   );
