@@ -20,7 +20,6 @@
     "node": "14.x"
   },
   "scripts": {
-    "build": "yarn workspaces foreach run build",
-    "start": "yarn workspace back-end start"
+    "build": "yarn workspaces foreach run build"
   }
 }
