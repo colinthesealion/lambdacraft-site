@@ -8,8 +8,8 @@ async function streamFileFromCubedHost(filename: string, stream: Response) {
   await client.access({
     host: 'chi1.mc.cubedhost.com',
     //port: 21,
-    user: 'redacted',
-    password: 'redacted',
+    user: process.env.FTP_USERNAME,
+    password: process.env.FTP_PASSWORD,
   });
   await client.downloadTo(stream, filename);
   client.close();
