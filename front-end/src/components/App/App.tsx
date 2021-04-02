@@ -107,7 +107,7 @@ function PlayerData({ player }: PlayerDataProps) {
           <TableRow>
             <TableCell><>Last Seen:</></TableCell>
             <TableCell>
-              <ReactJson src={data.Paper.value.LastSeen} />
+              <ReactJson src={data.Paper?.value.LastSeen} />
             </TableCell>
           </TableRow>
           <TableRow>
@@ -127,7 +127,7 @@ const playerStatsQuery = selectorFamily<any,string>({
 interface PlayerStatsProps {
   player: Player;
 }
-function PlayerStats({ player }: PlayerDataProps) {
+function PlayerStats({ player }: PlayerStatsProps) {
   const data = useRecoilValue(playerStatsQuery(player.uuid));
   return <ReactJson src={data} />;
 }
