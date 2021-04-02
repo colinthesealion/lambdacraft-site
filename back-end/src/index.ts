@@ -7,7 +7,6 @@ async function streamFileFromCubedHost(filename: string, stream: Response) {
   const client = new Client();
   await client.access({
     host: 'chi1.mc.cubedhost.com',
-    //port: 21,
     user: process.env.FTP_USERNAME,
     password: process.env.FTP_PASSWORD,
   });
