@@ -9,7 +9,7 @@ export async function fetchFromBackend(route: string) {
 }
 
 export async function getPlayerAdvancementData(uuid: string): Promise<AdvancementData> {
-  return (await fetchFromBackend(`advancements/${uuid}`)) as AdvancementData;
+  return (await fetchFromBackend(`player/advancements/${uuid}`)) as AdvancementData;
 }
 
 export async function getPlayerData(uuid: string): Promise<any> {
@@ -21,5 +21,5 @@ export async function getPlayerStats(uuid: string): Promise<any> {
 }
 
 export async function getPlayers(): Promise<Player[]> {
-  return (await fetchFromBackend('players')) as Player[];
+  return (await fetchFromBackend('player/list')) as Player[];
 }
