@@ -15,7 +15,7 @@ interface CriteriaProps {
 }
 export default function Criteria({ definition, data}: CriteriaProps) {
   const { id } = definition;
-  const name = React.useMemo(() => definition.name || deNamespace(definition.id), [definition.id]);
+  const name = React.useMemo(() => definition.name || deNamespace(definition.id), [definition]);
   const done = React.useMemo(
     () => isDone(definition, data),
     [definition, data]

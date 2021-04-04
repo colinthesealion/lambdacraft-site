@@ -1,12 +1,5 @@
 import { AdvancementData, Player } from '../types';
-
-export async function fetchFromBackend(route: string) {
-  const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/${route}`);
-  if(!response.ok) {
-    throw new Error(`Failed to fetch ${route}`);
-  }
-  return response.json();
-}
+import { fetchFromBackend } from './utils';
 
 export async function getPlayerAdvancementData(uuid: string): Promise<AdvancementData> {
   return (await fetchFromBackend(`player/advancements/${uuid}`)) as AdvancementData;

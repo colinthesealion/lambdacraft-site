@@ -1,71 +1,59 @@
 import React from 'react';
-import ReactJson from 'react-json-view';
 import {
-  RecoilRoot,
-  selectorFamily,
-  useRecoilValue
+  RecoilRoot
 } from 'recoil';
 import {
+  Breadcrumbs,
   CircularProgress,
-  Paper,
-  Tab,
-  Typography
+  Link
 } from '@material-ui/core';
-import { TabContext, TabList, TabPanel } from '@material-ui/lab';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
+import Maps from '../Maps';
+import MembersPage from '../Members';
+import Scoreboard from '../Scoreboard';
 
-import PlayerAdvancements from '../PlayerAdvancements';
-import PlayerData from '../PlayerData';
-import PlayerDropdown from '../PlayerDropdown';
-import PlayerStats from '../PlayerStats';
-import { Player } from '../../types';
+function HomePage() {
+  return (
+    <div>LambaCraft is a Minecraft SMP server started in 2019 by LambdaCube, DoctorNoi and Ninjavitis</div>
+  );
+}
+
+function ScoreboardPage() {
+  return (
+    <React.Suspense fallback={<CircularProgress />}>
+      <Scoreboard />
+    </React.Suspense>
+  );
+}
+
+function MapsPage() {
+  return (
+    <React.Suspense fallback={<CircularProgress />}>
+      <Maps />
+    </React.Suspense>
+  );
+}
 
 interface AppProps {
 }
 export default function App(_props: AppProps) {
-  const [player, setPlayer] = React.useState<Player>();
-  const [selectedTab, selectTab]  = React.useState('skin');
-  const handleChange = React.useCallback((_event: React.SyntheticEvent, value: string) => {
-    selectTab(value);
-  }, [selectTab]);
   return (
     <RecoilRoot>
-      <Typography variant="h4" gutterBottom>LambdaCraft Members</Typography>
-      <React.Suspense fallback={<CircularProgress />}>
-        <PlayerDropdown player={player} setPlayer={setPlayer} />
-      </React.Suspense>
-      {player && (
-        <>
-          <TabContext value={selectedTab}>
-            <Paper square>
-              <TabList onChange={handleChange}>
-                <Tab label="Skin" value="skin" />
-                <Tab label="Data" value="data" />
-                <Tab label="Stats" value="stats" />
-                <Tab label="Advancement Progress" value="advancements" />
-              </TabList>
-            </Paper>
-            <TabPanel value="skin">
-              <img src={`https://minecraftskinstealer.com/api/v1/skin/render/fullbody/${player.name}/700`} alt={player.name} />
-            </TabPanel>
-            <TabPanel value="data">
-              <React.Suspense fallback={<CircularProgress />}>
-                <PlayerData player={player} />
-              </React.Suspense>
-            </TabPanel>
-            <TabPanel value="stats">
-              <React.Suspense fallback={<CircularProgress />}>
-                <PlayerStats player={player} />
-              </React.Suspense>
-            </TabPanel>
-            <TabPanel value="advancements">
-              <React.Suspense fallback={<CircularProgress />}>
-                <PlayerAdvancements player={player} />
-              </React.Suspense>
-            </TabPanel>
-          </TabContext>
-        </>
-      )}
+      <BrowserRouter>
+        <Breadcrumbs>
+          <Link href="/">Home</Link>
+          <Link href="/scoreboard">Scoreboard</Link>
+          <Link href="/members">Members</Link>
+          <Link href="/maps">Maps</Link>
+        </Breadcrumbs>
+        <Switch>
+          <Route exact path="/"><HomePage /></Route>
+          <Route exact path="/scoreboard"><ScoreboardPage /></Route>
+          <Route exact path="/members"><MembersPage /></Route>
+          <Route exact path="/maps"><MapsPage /></Route>
+        </Switch>
+      </BrowserRouter>
     </RecoilRoot>
   );
 }

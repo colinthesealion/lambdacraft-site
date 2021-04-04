@@ -10,7 +10,7 @@ router.get('/advancements/:uuid', (request, response) => {
 });
 
 router.get('/data/:uuid', async (request, response) => {
-  const filename = `Savanah Plateaudata/${request.params.uuid}.dat`;
+  const filename = `Savanah Plateau/playerdata/${request.params.uuid}.dat`;
   const data = await getNBTDataFromCubedHost(filename);
   response.json(data);
 });

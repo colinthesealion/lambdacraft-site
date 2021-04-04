@@ -1,5 +1,4 @@
 import React from 'react';
-import ReactJson from 'react-json-view';
 import { selectorFamily, useRecoilValue } from 'recoil';
 import {
   FormControl,
@@ -34,7 +33,7 @@ export default function PlayerStats({ player }: PlayerStatsProps) {
   const [category, setCategory] = React.useState(categories[0]);
   const handleChange = React.useCallback((event: React.ChangeEvent<{ value: unknown}>) => {
     setCategory(event.target.value as string);
-  }, [categories, category]);
+  }, [setCategory]);
   return (
     <>
       <FormControl style={{ minWidth: 120 }}>
